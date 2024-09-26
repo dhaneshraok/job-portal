@@ -25,6 +25,7 @@ const Jobs = () => {
     }, [allJobs, searchedQuery]);
 
     return (
+
         <div>
             <Navbar />
             <div className='max-w-7xl mx-auto mt-5'>
