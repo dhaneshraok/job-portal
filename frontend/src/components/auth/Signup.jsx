@@ -34,6 +34,18 @@ const Signup = () => {
     }
     const submitHandler = async (e) => {
         e.preventDefault();
+        // Validate required fields
+        if (!input.fullname || !input.email || !input.password) {
+            toast.error("Please fill all required fields")
+            return
+        }
+        // Basic email validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+        if (!emailRegex.test(input.email)) {
+            toast.error("Please enter a valid email address")
+            return
+        }
+
         const formData = new FormData();    //formdata object
         formData.append("fullname", input.fullname);
         formData.append("email", input.email);
