@@ -13,8 +13,6 @@ dotenv.config();
 
 const app = express();
 
-const __dirname = path.resolve();
-
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -25,7 +23,6 @@ const corsOptions = {
     origin: process.env.CLIENT_URL || "http://localhost:5173",
     credentials: true,
 };
-
 app.use(cors(corsOptions));
 
 // Routes
@@ -34,12 +31,15 @@ app.use("/api/v1/company", companyRoute);
 app.use("/api/v1/job", jobRoute);
 app.use("/api/v1/application", applicationRoute);
 
-// Serve React build static files
-app.use(express.static(path.join(__dirname, "frontend", "dist"))); // Adjust folder if needed
+// Get absolute path to frontend build directory using process.cwd()
+const frontendBuildPath = path.join(process.cwd(), "frontend", "dist");
 
-// Catch-all to serve index.html for React Router
+// Serve React build static files
+app.use(express.static(frontendBuildPath));
+
+// Catch-all to serve index.html for React Router support
 app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "frontend", "dist", "index.html"));
+    res.sendFile(path.join(frontendBuildPath, "index.html"));
 });
 
 // Listen and connect DB
