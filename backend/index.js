@@ -20,7 +20,7 @@ app.use(cookieParser());
 
 // CORS setup - allow frontend URL from env or fallback to localhost for dev
 const corsOptions = {
-    origin: process.env.CLIENT_URL || "http://localhost:5173",
+    origin: process.env.CLIENT_URL || "http://localhost:5173", // e.g. https://job-portal-dhan.netlify.app
     credentials: true,
 };
 app.use(cors(corsOptions));
@@ -31,7 +31,7 @@ app.use("/api/v1/company", companyRoute);
 app.use("/api/v1/job", jobRoute);
 app.use("/api/v1/application", applicationRoute);
 
-// Get absolute path to frontend build directory using process.cwd()
+// Get absolute path to frontend build directory
 const frontendBuildPath = path.join(process.cwd(), "frontend", "dist");
 
 // Serve React build static files
