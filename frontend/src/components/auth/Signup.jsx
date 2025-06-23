@@ -45,7 +45,11 @@ const Signup = () => {
             toast.error("Please enter a valid email address")
             return
         }
-
+        // Validate file
+        if (!input.file) {
+            toast.error('Please upload a profile image');
+            return;
+        }
         const formData = new FormData();    //formdata object
         formData.append("fullname", input.fullname);
         formData.append("email", input.email);
