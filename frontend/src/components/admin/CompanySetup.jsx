@@ -21,7 +21,7 @@ const CompanySetup = () => {
         location: "",
         file: null
     });
-    const {singleCompany} = useSelector(store=>store.company);
+    const { singleCompany } = useSelector(store => store.company);
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
@@ -50,7 +50,7 @@ const CompanySetup = () => {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 },
-                withCredentials: true
+
             });
             if (res.data.success) {
                 toast.success(res.data.message);
@@ -72,7 +72,7 @@ const CompanySetup = () => {
             location: singleCompany.location || "",
             file: singleCompany.file || null
         })
-    },[singleCompany]);
+    }, [singleCompany]);
 
     return (
         <div>
